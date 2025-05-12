@@ -183,9 +183,7 @@ pip freeze > requirements.txt
 
 Este projeto foi desenvolvido com fins educativos e demonstrativos. Para contribuições ou colaborações:
 **Ygor Taramelli**
-Email: [seu.email@exemplo.com](mailto:seu.email@exemplo.com)
-LinkedIn: [https://www.linkedin.com/in/seu-perfil](https://www.linkedin.com/in/seu-perfil)
+Email: taramelli@icloud.com
+LinkedIn: https://www.linkedin.com/in/ygor-taramelli-03a859359/
 
 ---
-
-🔗 **Projeto ideal para portfólio de Data Science aplicado à saúde**: demonstra domínio de todo o pipeline — da limpeza de dados à entrega de valor via interface interativa com foco prático.
