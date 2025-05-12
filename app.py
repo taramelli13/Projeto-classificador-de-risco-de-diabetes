@@ -1,13 +1,14 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import joblib
+import pickle
 
 
 try:
-    model = joblib.load('modelo_diabetes.joblib')
+    with open('modelo_diabetes.pkl', 'rb') as f:
+        model = pickle.load(f)
 except FileNotFoundError:
-    st.error("❌ Arquivo do modelo não encontrado. Verifique se 'modelo_diabetes.joblib' está na mesma pasta.")
+    st.error("❌ Arquivo do modelo não encontrado. Verifique se 'modelo_diabetes.pkl' está na mesma pasta.")
     st.stop()
 except Exception as e:
     st.error(f"❌ Erro ao carregar o modelo: {e}")
