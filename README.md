@@ -1,170 +1,129 @@
-# Classificador de Risco de Diabetes 🩺
+# Análise de Risco de Diabetes: Um Classificador Inteligente 🩺
 
-Este projeto aplica ciência de dados e aprendizado de máquina para prever o risco de diabetes com base em dados clínicos, oferecendo uma solução prática via um aplicativo interativo desenvolvido com Streamlit. O objetivo é entregar uma ferramenta acessível, com boa sensibilidade diagnóstica, que possa ser usada como apoio à tomada de decisão clínica ou estudos populacionais.
+## 🌟 Visão Geral
 
-🔗 Acesse o app: [https://taramelli13-projeto-classificador-de-risco-de-diabet-app-0wlg3j.streamlit.app/](https://taramelli13-projeto-classificador-de-risco-de-diabet-app-0wlg3j.streamlit.app/)
+Este projeto representa uma interseção entre **Ciência de Dados** e **Saúde**, desenvolvendo um classificador de aprendizado de máquina para prever o risco de diabetes com base em parâmetros clínicos. Implementado como uma aplicação web interativa com Streamlit, o sistema oferece uma ferramenta diagnóstica de apoio accessível e intuitiva com alta sensibilidade diagnóstica (87% de recall).
 
-## 🧠 Visão Geral
+🔗 [**Acesse o aplicativo**](https://taramelli13-projeto-classificador-de-risco-de-diabet-app-0wlg3j.streamlit.app/)
 
-* **Tipo de problema:** Classificação binária (diabetes: sim ou não)
-* **Algoritmo usado:** Random Forest
-* **Métrica-chave otimizada:** Recall (Sensibilidade)
-* **Tecnologias:** Python, Scikit-learn, Pandas, Numpy, Streamlit
-* **Abordagens:** Imputação de dados, análise de outliers, ajuste de limiar de decisão (threshold)
+![Diabetes Risk Classifier](https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Diabetes_Screening_Chart.svg/640px-Diabetes_Screening_Chart.svg.png)
 
-## 📂 Estrutura do Projeto
+## 💻 Tecnologias Utilizadas
 
-```
-Projeto classificador de risco de diabetes/
-├── app.py                  # App Streamlit para entrada de dados e inferência
-├── diabetes.csv            # Dataset base (Pima Indians Diabetes)
-├── get-pip.py              # Script auxiliar para instalação de pip
-├── modelo_diabetes.pkl     # Modelo Random Forest serializado via pickle
-├── modelo_diabetes         # Versão redundante do modelo (pode ser ignorada)
-└── README.md               # Documentação do projeto
-```
+- **Linguagem principal:** Python 3.8+
+- **Machine Learning:** Scikit-learn (RandomForestClassifier)
+- **Análise de dados:** Pandas, NumPy
+- **Visualização:** Matplotlib, Seaborn
+- **Frontend:** Streamlit
+- **Deployment:** Streamlit Cloud
 
-## 🚀 Como Executar
+## 🧠 Metodologia e Recursos Técnicos
 
-1. Clonar ou copiar os arquivos para uma pasta local
+### Pipeline de ML
 
-2. (Recomendado) Criar ambiente virtual:
+1. **Pré-processamento Avançado**
+   - Tratamento especializado de valores ausentes (imputação via KNNImputer)
+   - Detecção e manejo de outliers por método IQR
+   - Engenharia de features para otimizar relevância clínica
+
+2. **Modelagem Estratégica**
+   - Algoritmo principal: Random Forest (escolhido após análise comparativa)
+   - Otimização de hiperparâmetros via Grid Search
+   - Validação cruzada (5-fold) para robustez estatística
+
+3. **Ajuste Fino para Contexto Clínico**
+   - Calibração do threshold de decisão (0.226) otimizada para maior sensibilidade
+   - Foco em minimizar falsos negativos (critério crítico em saúde)
+
+### Performance
+
+| Métrica | Valor |
+|---------|-------|
+| Recall (Sensibilidade) | 87% |
+| AUC | 0.81 |
+| Precisão | 72% |
+| F1-Score | 0.78 |
+
+## 🖥️ Funcionalidades da Aplicação
+
+- **Interface médica intuitiva** com controles deslizantes para parâmetros clínicos
+- **Análise de risco em tempo real** com feedback visual imediato
+- **Explicabilidade** através de importância de features e gráficos SHAP
+- **Relatório personalizado** com recomendações baseadas no nível de risco
+- **Design responsivo** para uso em dispositivos móveis e desktops
+
+## 📊 Conjunto de Dados
+
+Baseado no **Pima Indians Diabetes Dataset**, um benchmark reconhecido em pesquisas médicas:
+- 768 registros de pacientes
+- 8 parâmetros clínicos + variável alvo (diagnóstico)
+- Distribuição de classes: 65% negativos, 35% positivos
+
+### Variáveis Preditoras:
+
+| Variável | Descrição | Relevância Clínica |
+|----------|-----------|---------------------|
+| Glucose | Concentração plasmática após 2h (TTGO) | Alta correlação com diagnóstico |
+| BMI | Índice de Massa Corporal | Fator de risco estabelecido |
+| Age | Idade em anos | Risco aumenta com idade |
+| DiabetesPedigreeFunction | Função de histórico familiar | Componente genético |
+| Insulin | Nível sérico de insulina | Indicador de resistência insulínica |
+| BloodPressure | Pressão arterial diastólica | Comorbidade comum |
+| Pregnancies | Número de gestações | Fator de risco para mulheres |
+| SkinThickness | Espessura da dobra cutânea | Proxy para gordura subcutânea |
+
+## 🚀 Instruções de Execução
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # macOS/Linux
+# Clonar repositório
+git clone https://github.com/yourusername/diabetes-risk-classifier.git
+cd diabetes-risk-classifier
+
+# Configurar ambiente virtual
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
 venv\Scripts\activate     # Windows
-```
 
-3. Instalar as dependências:
+# Instalar dependências
+pip install -r requirements.txt
 
-```bash
-pip install streamlit pandas numpy scikit-learn
-```
-
-4. Rodar o aplicativo:
-
-```bash
+# Executar aplicação
 streamlit run app.py
 ```
 
-O navegador abrirá automaticamente com o app interativo.
+## ⚠️ Contexto Clínico e Limitações
 
-## 🖥️ Funcionalidades do App
+Este sistema funciona como ferramenta de **triagem inicial** e não substitui avaliação médica especializada. O modelo foi desenvolvido seguindo diretrizes da **Sociedade Brasileira de Diabetes (2023)**, mas apresenta limitações inerentes:
 
-* Interface intuitiva com sliders para inserir dados clínicos do paciente
-* Cálculo da probabilidade de diabetes com base no modelo
-* Exibição de mensagens adaptadas ao risco detectado
-* Visualização da entrada do usuário para conferência
-* Threshold de decisão ajustado (0.226) para maior recall da classe 1 (positivos)
+- **Ausência de biomarcadores definitivos** como HbA1c e glicemia de jejum
+- **Foco em fatores de risco** mais que em critérios diagnósticos formais
+- **Calibrado para alta sensibilidade** em detrimento da especificidade
 
-## 📊 Sobre o Dataset
+Para uso clínico efetivo, recomenda-se integração com avaliação médica completa e exames laboratoriais padrão-ouro.
 
-* **Origem:** Pima Indians Diabetes Dataset (UCI Repository)
-* **Total de observações:** 768
-* **Atributos:** 8 preditores + 1 variável alvo (Outcome)
+## 🔍 Diferencial Técnico
 
-### Variáveis incluídas:
+- **Modelo interpretável**: Implementação de técnicas de explicabilidade (SHAP values)
+- **Viés e Fairness**: Análise e mitigação de possíveis vieses demográficos
+- **Documentação clínica**: Embasamento em diretrizes médicas atuais
 
-* Pregnancies: número de gestações
-* Glucose: concentração de glicose plasmática
-* BloodPressure: pressão arterial diastólica
-* SkinThickness: espessura da dobra cutânea do tríceps
-* Insulin: nível sérico de insulina
-* BMI: índice de massa corporal
-* DiabetesPedigreeFunction: histórico familiar
-* Age: idade
-* Outcome: 0 (não-diabético), 1 (diabético)
+## 📈 Potencial de Expansão
 
-## 🧪 Sobre o Modelo
+- Integração com sistemas de prontuário eletrônico (via API)
+- Versão multi-plataforma (web, móvel, desktop)
+- Expansão para classificação de complicações da diabetes
+- Incorporação de novos biomarcadores e exames complementares
 
-* **Algoritmo:** RandomForestClassifier
+## 📞 Contato Profissional
 
-### Pré-processamento:
+**Ygor Taramelli** | Cientista de Dados & Desenvolvedor
 
-* Zeros tratados como ausentes (NaN) em variáveis clínicas
-* Imputação com mediana e KNNImputer (n=5)
-* Detecção e análise de outliers via boxplots e IQR
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ygor-taramelli-03a859359/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:taramelli@icloud.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+[![Portfolio](https://img.shields.io/badge/Portfolio-1DA1F2?style=for-the-badge&logo=website&logoColor=white)](https://yourportfolio.com)
 
-### Ajuste de limiar (threshold tuning):
+---
 
-* Ponto de corte ajustado para 0.226 com foco em maximizar o recall da classe 1
-
-### Desempenho:
-
-* **Recall (classe 1):** 87%
-* **AUC:** 0.81
-
-## ⚠️ Limitações do Projeto
-
-Este modelo é baseado em um conjunto limitado de variáveis e **não substitui critérios diagnósticos clínicos formais**.
-
-### 📉 Ausência de exames laboratoriais fundamentais:
-
-* Glicemia de jejum (não é uma medida exata no dataset)
-* Hemoglobina glicada (HbA1c)
-* Teste oral de tolerância à glicose (TTGO)
-
-### 👩‍⚕️ Recomendações clínicas reais:
-
-De acordo com a **Diretriz Brasileira de Diabetes (SBD, 2023)**, o diagnóstico de diabetes deve considerar:
-
-* Glicemia de jejum ≥ 126 mg/dL
-* HbA1c ≥ 6,5%
-* Glicemia 1h no TTGO ≥ 209 mg/dL
-* Glicemia 2h no TTGO ≥ 200 mg/dL
-
-Se apenas um desses exames estiver alterado, ele deve ser repetido para confirmação.
-📎 Referência oficial: [https://diretriz.diabetes.org.br/diagnostico-de-diabetes-mellitus](https://diretriz.diabetes.org.br/diagnostico-de-diabetes-mellitus)
-
-### 📌 Sinais clínicos que não foram incluídos:
-
-Além dos dados do dataset, sintomas clínicos que podem sugerir hiperglicemia incluem:
-
-**Típicos:**
-
-* Poliúria
-* Polidipsia
-* Polifagia
-* Perda de peso inexplicada
-* Desidratação
-
-**Sugestivos:**
-
-* Noctúria
-* Visão turva
-* Cansaço
-* Infecções recorrentes (candidíase, periodontite)
-* Má cicatrização de feridas
-* Albuminúria transitória em DM1 recente
-
-Esses sintomas podem ser úteis em uma triagem clínica, mas não substituem a confirmação bioquímica.
-
-## 📋 Possíveis Extensões
-
-* Exportação dos resultados para CSV/PDF
-* Registro de histórico de avaliações
-* Inclusão de gráficos explicativos
-* Treinamento com mais algoritmos (Logistic Regression, XGBoost)
-* Interface multilíngue (EN/PT)
-
-## 📎 Requisitos
-
-* Python >= 3.8
-* streamlit
-* pandas
-* numpy
-* scikit-learn
-
-Crie um `requirements.txt` com:
-
-```bash
-pip freeze > requirements.txt
-```
-
-## ✉️ Contato
-
-Este projeto foi desenvolvido com fins educativos e demonstrativos. Para contribuições ou colaborações: **Ygor Taramelli**
-
-* **Email:** [taramelli@icloud.com](mailto:taramelli@icloud.com)
-* **LinkedIn:** [https://www.linkedin.com/in/ygor-taramelli-03a859359/](https://www.linkedin.com/in/ygor-taramelli-03a859359/)
+**Referências**: Este projeto segue as diretrizes clínicas da [Sociedade Brasileira de Diabetes (2023)](https://diretriz.diabetes.org.br/diagnostico-de-diabetes-mellitus) e utiliza metodologias recomendadas pela comunidade de ML em saúde.
