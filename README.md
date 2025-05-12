@@ -183,7 +183,9 @@ pip freeze > requirements.txt
 
 Este projeto foi desenvolvido com fins educativos e demonstrativos. Para contribuições ou colaborações:
 **Ygor Taramelli**
+
 Email: taramelli@icloud.com
+
 LinkedIn: https://www.linkedin.com/in/ygor-taramelli-03a859359/
 
 ---
