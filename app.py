@@ -1,18 +1,18 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import pickle
+import joblib
 
 
 try:
-    model = pickle.load(open('modelo_diabetes.pkl', 'rb'))
+    model = joblib.load('modelo_diabetes.joblib')
 except FileNotFoundError:
-    st.error("❌ Arquivo do modelo não encontrado. Verifique se 'modelo_diabetes.pkl' está na mesma pasta.")
+    st.error("❌ Arquivo do modelo não encontrado. Verifique se 'modelo_diabetes.joblib' está na mesma pasta.")
+    st.stop()
+except Exception as e:
+    st.error(f"❌ Erro ao carregar o modelo: {e}")
     st.stop()
 
-# Carregar o modelo salvo (ajuste o caminho se necessário)
-# O modelo precisa ter sido salvo com: pickle.dump(modelo_treinado, open('modelo.pkl', 'wb'))
-model = pickle.load(open('modelo_diabetes.pkl', 'rb'))  # Substitua pelo nome correto se diferente
 
 st.set_page_config(page_title="Classificador de Risco de Diabetes", layout="centered")
 st.title("🩺 Avaliação de Risco de Diabetes")
