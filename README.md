@@ -25,7 +25,6 @@ Projeto classificador de risco de diabetes/
 ├── get-pip.py              # Script auxiliar para instalação de pip
 ├── modelo_diabetes.pkl     # Modelo Random Forest serializado via pickle
 ├── modelo_diabetes         # Versão redundante do modelo (pode ser ignorada)
-├── train_model.py (opcional) # Script de treinamento completo
 └── README.md               # Documentação do projeto
 ```
 
