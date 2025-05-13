@@ -40,7 +40,7 @@ if st.button("📊 Avaliar Risco"):
     prob = model.predict_proba(input_data)[0][1]
     pred = int(prob >= threshold)
 
-    st.write(f"\n### 🔬 Probabilidade estimada de diabetes: **{prob:.2f}**")
+    st.write(f"\n### 🔬 Probabilidade estimada de diabetes: **{prob * 100:.1f}%**")
     
     if pred == 1:
         st.error("⚠️ Alto risco de diabetes detectado. Recomendamos acompanhamento profissional.")
